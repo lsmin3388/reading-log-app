@@ -1,0 +1,172 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Fonts — Apple system stack (renders SF Pro on Apple devices) */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', 'Segoe UI', Roboto, Arial, 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
+  --font-serif: var(--font-sans);
+
+  /* Color tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+
+  /* ── Apple neutral palette ─────────────────────────────────────
+     Light gray canvas (#f5f5f7), true-white cards, near-black ink
+     (#1d1d1f), Apple system blue accent (#0071e3).                */
+  --background:        oklch(0.966 0.002 264);      /* #f5f5f7 */
+  --foreground:        oklch(0.235 0.004 264);      /* #1d1d1f */
+  --card:              oklch(1 0 0);                 /* #ffffff */
+  --card-foreground:   oklch(0.235 0.004 264);
+  --popover:           oklch(1 0 0);
+  --popover-foreground:oklch(0.235 0.004 264);
+
+  /* Toss blue — the single hero accent */
+  --primary:           oklch(0.620 0.195 259);       /* #3182f6 */
+  --primary-foreground:oklch(1 0 0);
+
+  --secondary:         oklch(0.930 0.002 264);       /* #e8e8ed segmented track */
+  --secondary-foreground:oklch(0.235 0.004 264);
+
+  --muted:             oklch(0.955 0.002 264);       /* #f1f1f4 */
+  --muted-foreground:  oklch(0.556 0.006 264);       /* #86868b Apple gray text */
+
+  --accent:            oklch(0.928 0.003 264);       /* subtle hover gray */
+  --accent-foreground: oklch(0.235 0.004 264);
+
+  --destructive:       oklch(0.620 0.216 24);        /* #ff3b30 Apple red */
+  --border:            oklch(0.895 0.003 264);       /* #d2d2d7 hairline */
+  --input:             oklch(0.895 0.003 264);
+  --ring:              oklch(0.620 0.195 259);        /* focus = Toss blue */
+
+  /* Chart — Toss blue tints */
+  --chart-1:           oklch(0.620 0.195 259);
+  --chart-2:           oklch(0.690 0.150 254);
+  --chart-3:           oklch(0.760 0.110 250);
+  --chart-4:           oklch(0.820 0.075 246);
+  --chart-5:           oklch(0.560 0.185 268);
+
+  /* Iridescent hero gradient (Toss blue → indigo → cyan) */
+  --grad-a:            oklch(0.620 0.195 259);        /* #3182f6 */
+  --grad-b:            oklch(0.600 0.190 285);        /* indigo   */
+  --grad-c:            oklch(0.780 0.130 210);        /* cyan     */
+
+  --radius: 0.75rem;
+
+  /* Rating star — Apple amber/orange (#ff9f0a) */
+  --star-fill: oklch(0.795 0.155 66);
+
+  /* Soft, diffuse Apple-style elevation */
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 16px oklch(0 0 0 / 0.06);
+  --shadow-panel: 0 8px 40px oklch(0 0 0 / 0.12);
+
+  --sidebar:                oklch(0.980 0.001 264);
+  --sidebar-foreground:     oklch(0.235 0.004 264);
+  --sidebar-primary:        oklch(0.620 0.195 259);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent:         oklch(0.928 0.003 264);
+  --sidebar-accent-foreground: oklch(0.235 0.004 264);
+  --sidebar-border:         oklch(0.895 0.003 264);
+  --sidebar-ring:           oklch(0.620 0.195 259);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  /* Apple headlines: tight optical tracking */
+  h1, h2, h3, h4 {
+    letter-spacing: -0.021em;
+  }
+}
+
+@layer utilities {
+  /* Toss-style spring entrance — rises with a soft overshoot */
+  @keyframes rise-in {
+    0%   { opacity: 0; transform: translateY(18px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .animate-rise {
+    animation: rise-in 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes float-blob {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50%      { transform: translate3d(0, -12px, 0) scale(1.04); }
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--grad-a),
+      var(--grad-b) 45%,
+      var(--grad-c)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-rise { animation: none; }
+  }
+}

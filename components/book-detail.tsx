@@ -41,7 +41,13 @@ function readingDays(start: string | null, end: string | null): string | null {
 
 export function BookDetail({ book, onClose, onEdit, onDelete }: BookDetailProps) {
   const [confirmingDelete, setConfirmingDelete] = useState(false)
+  const [imageFailed, setImageFailed] = useState(false)
   const open = book !== null
+
+  // Reset the cover fallback whenever a different book is shown.
+  useEffect(() => {
+    setImageFailed(false)
+  }, [book?.id])
 
   // Close on Escape and lock body scroll while the panel is open.
   useEffect(() => {
@@ -103,13 +109,14 @@ export function BookDetail({ book, onClose, onEdit, onDelete }: BookDetailProps)
           {/* Cover + basic info */}
           <div className="flex gap-5">
             <div className="relative w-28 aspect-[2/3] rounded-lg overflow-hidden border border-border shrink-0 shadow-sm">
-              {book.cover_url ? (
+              {book.cover_url && !imageFailed ? (
                 <Image
                   src={book.cover_url}
                   alt={`${book.title} 표지`}
                   fill
                   sizes="112px"
                   className="object-cover"
+                  onError={() => setImageFailed(true)}
                 />
               ) : (
                 <div className="flex h-full items-center justify-center bg-muted">

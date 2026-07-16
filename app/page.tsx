@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import { Plus, Search, BookOpen } from 'lucide-react'
 import { BookCard } from '@/components/book-card'
 import { BookForm } from '@/components/book-form'
@@ -11,6 +12,14 @@ import { useBooks } from '@/lib/use-books'
 import { STATUS_FILTER_TABS } from '@/lib/types'
 import type { Book, BookFormData, FilterTab } from '@/lib/types'
 import { cn } from '@/lib/utils'
+
+// Artistic 3D collection view — client-only (WebGL), code-split.
+const BookGalaxy = dynamic(() => import('@/components/book-galaxy'), {
+  ssr: false,
+  loading: () => (
+    <div className="rounded-[28px] h-[440px] sm:h-[560px] bg-[#070914] border border-white/10" />
+  ),
+})
 
 export default function BookshelfPage() {
   const { books, loading, addBook, updateBook, deleteBook } = useBooks()
@@ -99,6 +108,9 @@ export default function BookshelfPage() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-6">
         {/* 3D hero */}
         <ReadingHero books={books} onAddBook={handleAddBook} />
+
+        {/* Artistic 3D galaxy of the collection */}
+        <BookGalaxy books={books} />
 
         {/* Stats */}
         <StatsPanel books={books} />
